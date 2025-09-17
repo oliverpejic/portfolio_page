@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oliver Pejic — Portfolio</title>
+  <meta name="description" content="Personal webpage of Oliver Pejic, a Data Science student." />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --bg-2: #111218;
+      --text: #e6e6e6;
+      --muted: #a7adb9;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #5dd3ff;
+      --accent-2: #7effbf;
+      --shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f8fb;
+        --bg-2: #ffffff;
+        --text: #121418;
+        --muted: #5b667a;
+        --card: rgba(255,255,255,0.9);
+        --border: rgba(16, 24, 40, 0.08);
+        --shadow: 0 10px 30px rgba(16,24,40,0.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(93,211,255,0.18), transparent 60%),
+        radial-gradient(1000px 600px at 90% 10%, rgba(126,255,191,0.16), transparent 60%),
+        var(--bg);
+      /* Keep gradients fixed and prevent tiling to avoid visible seams on scroll */
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-attachment: fixed, fixed, scroll;
+      background-position: 0 0, 0 0, 0 0;
+      min-height: 100dvh;
+    }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(93,211,255,0.18), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 10%, rgba(126,255,191,0.16), transparent 60%),
+                  var(--bg);
+    }
+    .wrap { width: min(1120px, 92vw); margin: 0 auto; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: color-mix(in oklab, var(--bg-2) 70%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: center; padding: 14px 0; }
+    
+    
+    .nav a { color: var(--text); text-decoration: none; opacity: 0.9; }
+    .nav a:hover { opacity: 1; }
+    .btn { display: inline-block; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2) 92%, transparent), color-mix(in oklab, var(--bg-2) 80%, transparent));
+      box-shadow: var(--shadow); text-decoration: none; color: var(--text); font-weight: 600; }
+    .btn:hover { transform: translateY(-1px); }
+
+    /* Hero */
+    .hero { display: grid; gap: 14px; padding: 56px 0 32px; }
+    .eyebrow { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; }
+    h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 4px 0; }
+    .lead { font-size: 1.05rem; color: var(--muted); max-width: 60ch; }
+    .tagline { font-size: 1rem; color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
+    .hero .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+
+    /* Sections */
+    section { padding: 36px 0; }
+    .section-title { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.4px; margin-bottom: 14px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; box-shadow: var(--shadow); }
+
+    /* About */
+    .about p { margin: 0; }
+
+    /* Skills */
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag { padding: 8px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-2); font-weight: 600; font-size: 0.92rem; }
+
+    /* Projects */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
+    @media (max-width: 800px) { .col-6 { grid-column: span 12; } }
+    .project h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .project p { margin: 0 0 8px; color: var(--muted); }
+    .project a { text-decoration: none; color: var(--text); font-weight: 600; border-bottom: 1px dashed var(--border); }
+
+    /* Contact */
+    .contact-list { display: grid; gap: 10px; }
+    .contact-item { display: flex; align-items: center; gap: 10px; }
+    .contact-item a { color: var(--text); text-decoration: none; }
+
+    /* Footer */
+    footer { padding: 28px 0 56px; color: var(--muted); font-size: 0.95rem; }
+
+    
+    .muted { color: var(--muted); }
+    .small { font-size: 0.95rem; }
+    .card ul { margin: 8px 0 0 18px; }
+    .card li { margin: 4px 0; }
+      /* Inline contact at top */
+    .contact-inline { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+    .contact-inline a { color: var(--text); text-decoration: none; border: 1px solid var(--border); background: var(--bg-2); padding: 8px 12px; border-radius: 12px; font-weight: 600; }
+    .contact-inline a:hover { transform: translateY(-1px); }
+      /* Center header nav */
+    .nav nav { display: flex; gap: 18px; align-items: center; justify-content: center; }
+      /* Mobile navigation & tweaks */
+    .menu-toggle { display: none; appearance: none; border:1px solid var(--border); background: var(--bg-2); padding: 10px 12px; border-radius: 12px; font-weight: 700; }
+    @media (max-width: 700px) {
+      .nav { justify-content: space-between; }
+      .nav nav { display: none; width: 100%; margin-top: 8px; justify-content: center; flex-wrap: wrap; gap: 12px; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      body.menu-open .nav nav { display: flex; }
+      /* Avoid jank from fixed backgrounds on some mobile browsers */
+      body { background-attachment: scroll, scroll, scroll; }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="wrap nav" role="navigation" aria-label="Primary">
+          
+          <nav>
+            <a href="#about">About</a>
+            
+            <a href="#experience">Experience</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+            <a class="btn" href="cv_en.pdf" download rel="noopener">Download CV</a>
+          </nav>
+        </div>
+      </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="intro-title">
+      <h1 id="intro-title">Oliver Pejic</h1>
+      <div id="contact" class="contact-inline" aria-label="Contact">
+        <a href="mailto:oliver.pejic@pm.me">📧 oliver.pejic@pm.me</a>
+        <a href="https://www.linkedin.com/in/oliver-peji%C4%87-a77873351/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://github.com/Kroli99" target="_blank" rel="noopener">🐙 GitHub</a>
+        <a class="btn" href="mailto:oliver.pejic@pm.me">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">About</h2>
+      <div class="card">
+        <p>I’m a Data Science student in Switzerland. As a career changer with a design-engineering apprenticeship, I adapt quickly to new areas, love challenges and am always motivated to learn new things.</p>
+        <p>Outside of my laptop, I play football, enjoy cooking and go to the gym.</p>
+      </div>
+    </section>
+
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 class="section-title" id="experience-title">Experience</h2>
+      <div class="grid">
+        <article class="card col-12">
+          <h3>IAESTE Intern — Technical University of Košice (TUKE), Slovakia</h3>
+          <p class="muted small">Aug–Oct 2024 · 12 weeks</p>
+          <ul>
+            <li>Contributed to a Slovak <em>Hate Speech</em> project and evaluation of Sentence Transformer models via the MTEB toolkit.</li>
+            <li>Prepared MTEB evaluation tasks for Slovak hate speech and Slovak question answering.</li>
+            <li>Opened pull requests for Retrieval SK-QuAD and Slovak Hate Speech; aligned with MTEB contribution guidelines.</li>
+            <li>Machine-translated SBERT evaluation sets to multiple Slavic languages.</li>
+          </ul>
+        </article>
+        <article class="card col-6">
+          <h3>Headteacher — CodeCamp</h3>
+          <p class="muted small">Ages 6–12 · Coding through play</p>
+          <ul>
+            <li>Planned and led beginner-friendly programming lessons with creative, hands-on activities.</li>
+            <li>Helped kids build confidence with logic, problem solving, and teamwork.</li>
+          </ul>
+        </article>
+        <article class="card col-6">
+          <h3>Cashier — Lidl</h3>
+          <p class="muted small">Retail operations</p>
+          <ul>
+            <li>Handled fast-paced checkout, customer service, and daily store routines with accuracy.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="portfolio-title">
+      <h2 class="section-title" id="portfolio-title">Projects</h2>
+      <div class="grid">
+        <article class="card project col-6">
+          <h3>CIFAR‑10 Image Classifier</h3>
+          <p>Custom CNN trained with robust augmentation and 5‑fold cross‑validation; tracked with W&B.</p>
+          <a href="https://github.com/Kroli99/del_mc_25" aria-label="Open project: CIFAR-10 Image Classifier (link placeholder)">View repo</a>
+        </article>
+        <article class="card project col-6">
+          <h3>XAI Mini‑Challenge</h3>
+          <p>Compared saliency methods (Integrated Gradients, Grad‑CAM, Occlusion) to explain CNN predictions.</p>
+          <a href="https://github.com/Kroli99/eai" aria-label="Open project: XAI Mini‑Challenge (link placeholder)">View repo</a>
+        </article>
+        <article class="card project col-6">
+          <h3>Oxford‑IIIT Pet Object Detection</h3>
+          <p>Evaluated detectors (SSD, RetinaNet, Faster R‑CNN) and analyzed parameters impacting mAP.</p>
+          <a href="https://github.com/FabianBoni/dlbs-mc-oliver-fabian" aria-label="Open project: Oxford‑IIIT Pet Object Detection (link placeholder)">View repo</a>
+        </article>
+        <article class="card project col-6">
+          <h3>RAG Chatbot (WIP)</h3>
+          <p>Prototype retrieval‑augmented QA with embeddings and vector search; focus on evaluation & UX.</p>
+          <a href="https://gitlab.fhnw.ch/tobias.lauber1/nlp_challenge_data_chatbot" aria-label="Open project: RAG Chatbot (link placeholder)">View repo</a>
+        </article>
+        <article class="card project col-6">
+            <h3>Recommender System for Movies</h3>
+            <p>Test and evaluation of different recommender systems for movies</p>
+            <a href="https://gitlab.fhnw.ch/oliver.pejic/rsy_mc_hs24" aria-label="Open project: Recommender System for Movies (link placeholder)">View repo</a>
+        </article>
+        <article class="card project col-6">
+            <h3>Analyze Trends in the Coffee Industry</h3>
+            <p>With Web Scraping ,Data Cleaning and LLM Analyze Trends in the Coffee Industry</p>
+            <a href="https://gitlab.fhnw.ch/pro4d/analyse-von-trends-in-der-kaffeeindustrie" aria-label="Open project: Analyze Trends in the Coffee Industry (link placeholder)">View repo</a>
+        </article>
+      </div>
+    </section>
+
+    
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Oliver Pejic. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Current year in footer
+    (function(){
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+
+    // Mobile menu toggle
+    (function(){
+      var toggle = document.querySelector('.menu-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', function(){
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        document.body.classList.toggle('menu-open', !expanded);
+      });
+    })();
+  </script>
+</body>
+</html>
