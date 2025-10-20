@@ -8,18 +8,20 @@
   <meta name="color-scheme" content="light dark" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <header>
-        <div class="wrap nav" role="navigation" aria-label="Primary">
-          
-          <nav>
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a class="btn" href="oliverpejic.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open CV (PDF) in a new tab">Open CV</a>
-          </nav>
-        </div>
-      </header>
+<body class="no-js">
+  <header>
+    <div class="wrap nav" role="navigation" aria-label="Primary">
+      <!-- Mobile burger -->
+      <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">☰ Menu</button>
+
+      <nav id="primary-nav">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a class="btn" href="oliverpejic.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open CV (PDF) in a new tab">Open CV</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="wrap">
     <section class="hero" aria-labelledby="intro-title">
@@ -75,39 +77,37 @@
       <h2 class="section-title" id="portfolio-title">Projects</h2>
       <div class="grid">
         <article class="card project col-6">
-          <h3>CIFAR‑10 Image Classifier</h3>
-          <p>Custom CNN trained with robust augmentation and 5‑fold cross‑validation; tracked with W&B.</p>
+          <h3>CIFAR-10 Image Classifier</h3>
+          <p>Custom CNN trained with robust augmentation and 5-fold cross-validation; tracked with W&B.</p>
           <a href="https://github.com/Kroli99/del_mc_25" aria-label="Open project: CIFAR-10 Image Classifier (link placeholder)">View repo</a>
         </article>
         <article class="card project col-6">
-          <h3>XAI Mini‑Challenge</h3>
-          <p>Compared saliency methods (Integrated Gradients, Grad‑CAM, Occlusion) to explain CNN predictions.</p>
-          <a href="https://github.com/Kroli99/eai" aria-label="Open project: XAI Mini‑Challenge (link placeholder)">View repo</a>
+          <h3>XAI Mini-Challenge</h3>
+          <p>Compared saliency methods (Integrated Gradients, Grad-CAM, Occlusion) to explain CNN predictions.</p>
+          <a href="https://github.com/Kroli99/eai" aria-label="Open project: XAI Mini-Challenge (link placeholder)">View repo</a>
         </article>
         <article class="card project col-6">
-          <h3>Oxford‑IIIT Pet Object Detection</h3>
-          <p>Evaluated detectors (SSD, RetinaNet, Faster R‑CNN) and analyzed parameters impacting mAP.</p>
-          <a href="https://github.com/FabianBoni/dlbs-mc-oliver-fabian" aria-label="Open project: Oxford‑IIIT Pet Object Detection (link placeholder)">View repo</a>
+          <h3>Oxford-IIIT Pet Object Detection</h3>
+          <p>Evaluated detectors (SSD, RetinaNet, Faster R-CNN) and analyzed parameters impacting mAP.</p>
+          <a href="https://github.com/FabianBoni/dlbs-mc-oliver-fabian" aria-label="Open project: Oxford-IIIT Pet Object Detection (link placeholder)">View repo</a>
         </article>
         <article class="card project col-6">
           <h3>RAG Chatbot (WIP)</h3>
-          <p>Prototype retrieval‑augmented QA with embeddings and vector search; focus on evaluation & UX.</p>
+          <p>Prototype retrieval-augmented QA with embeddings and vector search; focus on evaluation & UX.</p>
           <a href="https://gitlab.fhnw.ch/tobias.lauber1/nlp_challenge_data_chatbot" aria-label="Open project: RAG Chatbot (link placeholder)">View repo</a>
         </article>
         <article class="card project col-6">
-            <h3>Recommender System for Movies</h3>
-            <p>Test and evaluation of different recommender systems for movies</p>
-            <a href="https://gitlab.fhnw.ch/oliver.pejic/rsy_mc_hs24" aria-label="Open project: Recommender System for Movies (link placeholder)">View repo</a>
+          <h3>Recommender System for Movies</h3>
+          <p>Test and evaluation of different recommender systems for movies</p>
+          <a href="https://gitlab.fhnw.ch/oliver.pejic/rsy_mc_hs24" aria-label="Open project: Recommender System for Movies (link placeholder)">View repo</a>
         </article>
         <article class="card project col-6">
-            <h3>Analyze Trends in the Coffee Industry</h3>
-            <p>With Web Scraping ,Data Cleaning and LLM Analyze Trends in the Coffee Industry</p>
-            <a href="https://gitlab.fhnw.ch/pro4d/analyse-von-trends-in-der-kaffeeindustrie" aria-label="Open project: Analyze Trends in the Coffee Industry (link placeholder)">View repo</a>
+          <h3>Analyze Trends in the Coffee Industry</h3>
+          <p>With Web Scraping ,Data Cleaning and LLM Analyze Trends in the Coffee Industry</p>
+          <a href="https://gitlab.fhnw.ch/pro4d/analyse-von-trends-in-der-kaffeeindustrie" aria-label="Open project: Analyze Trends in the Coffee Industry (link placeholder)">View repo</a>
         </article>
       </div>
     </section>
-
-    
   </main>
 
   <footer>
@@ -115,20 +115,40 @@
   </footer>
 
   <script>
+    // JS active: remove no-js fallback
+    document.body.classList.remove('no-js');
+
     // Current year in footer
     (function(){
       var y = document.getElementById('year');
       if (y) y.textContent = new Date().getFullYear();
     })();
 
-    // Mobile menu toggle
+    // Mobile menu toggle + close on link / Esc
     (function(){
       var toggle = document.querySelector('.menu-toggle');
-      if (!toggle) return;
+      var nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeMenu() {
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
       toggle.addEventListener('click', function(){
         var expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!expanded));
         document.body.classList.toggle('menu-open', !expanded);
+      });
+
+      // Close after clicking a link (use capture to catch all links inside nav)
+      nav.addEventListener('click', function(e){
+        if (e.target.tagName.toLowerCase() === 'a') closeMenu();
+      }, true);
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') closeMenu();
       });
     })();
   </script>
