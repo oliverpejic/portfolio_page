@@ -121,3 +121,99 @@
     /* Avoid jank from fixed backgrounds on some mobile browsers */
     body { background-attachment: scroll, scroll, scroll; }
   }
+
+  /* Bessere Scroll-Anker mit sticky Header */
+[id] { scroll-margin-top: 84px; }
+
+/* Fokus sichtbar für Tastatur-Nutzer */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Mobile: bis 700px */
+@media (max-width: 700px) {
+
+  .wrap { width: 94vw; }
+
+  header { position: sticky; top: 0; }
+
+  /* Header-Layout: Hamburger sichtbar, Nav erst beim Toggle */
+  .nav { justify-content: space-between; gap: 10px; padding: 10px 0; }
+  .nav nav { 
+    display: none; 
+    width: 100%; 
+    margin-top: 8px; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+  }
+  body.menu-open .nav nav { display: flex; }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* Mobile Nav-Links als “Chips” / Buttons */
+  .nav nav a {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    text-decoration: none;
+  }
+
+  /* Hero kompakter & zentriert */
+  .hero { 
+    padding: 28px 0 16px; 
+    text-align: center; 
+    gap: 10px;
+  }
+  h1 { margin: 2px 0 6px; }
+  .lead, .tagline { margin-left: auto; margin-right: auto; }
+
+  /* Kontakt-Buttons: gestapelt & full width */
+  .contact-inline { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 8px; 
+  }
+  .contact-inline a { 
+    width: 100%; 
+    text-align: center; 
+    padding: 12px 14px; 
+  }
+
+  /* Karten & Grid kompakter */
+  section { padding: 28px 0; }
+  .section-title { margin-bottom: 10px; }
+  .card { padding: 14px; border-radius: 14px; }
+  .grid { gap: 12px; }
+  .col-6 { grid-column: span 12; } /* 1 Spalte auf Handy */
+
+  /* Buttons etwas grösser antippbar */
+  .btn { padding: 12px 14px; }
+
+  /* Mobile: Background-Fix gegen Jank (ergänzt bestehende Regel) */
+  body { background-attachment: scroll, scroll, scroll; }
+}
+
+/* Very small screens: bis 400px */
+@media (max-width: 400px) {
+  h1 { font-size: 26px; }
+  .btn, .contact-inline a { font-size: 0.95rem; }
+  .card { padding: 12px; }
+  .nav nav { gap: 8px; }
+}
